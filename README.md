@@ -12,3 +12,7 @@
 
 ## 制造内容
 ![Image text](https://raw.githubusercontent.com/zengyuhan503/recreateByOneself-/master/b987c7643cba2953a64920551df8b4d6.jpg)
+``` 
+        3D  建筑制造
+
+```
