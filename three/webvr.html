@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://cdn.bootcss.com/three.js/r83/three.js"></script>
+    <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+    <script src="webvr.js"></script>
+    <script>
+        // 获取浏览器窗口的宽高，后续会用
+        var width = window.innerWidth
+        var height = window.innerHeight
+
+        var _scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(80, width / height, 0.1, 500)
+        // 初始化摄像机插件（用于拖拽旋转摄像机，产生交互效果）
+        var orbitControls = new THREE.OrbitControls(camera)
+        orbitControls.autoRotate = true
+
+        // 创建一个 WebGL 渲染器，Three.js 还提供 <canvas>, <svg>, CSS3D 渲染器。
+        var renderer = new THREE.WebGLRenderer({
+            antialias: true
+        });
+        // 设置渲染器的清除颜色（即绘制下一帧前填充的颜色）和输出的 canvas 的尺寸
+        renderer.setClearColor(0xffffff);
+        renderer.setSize(width, height);
+        document.body.appendChild(renderer.domElement);
+
+        const light = new THREE.DirectionalLight()
+        light.position.set(1, 10, 10)
+        camera.add(light)
+        //1.  地板
+        var geometry = new THREE.BoxGeometry(400, 400, 1);
+        var material = new THREE.MeshBasicMaterial({ color: 0x5a5656 });
+        var cube = new THREE.Mesh(geometry, material);
+        _scene.add(cube);
+        camera.position.z = 460;
+
+        // 马路边线
+        // 下边线
+        var geometry = new THREE.BoxBufferGeometry(200, 30, 5);
+        var material = new THREE.MeshBasicMaterial({ color: 0xe7c9be });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.y = -140
+        cube.position.x = -60
+        cube.position.z = 3
+        _scene.add(cube);
+
+        var geometry = new THREE.BoxBufferGeometry(50, 30, 5);
+        var material = new THREE.MeshBasicMaterial({ color: 0xe7c9be });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.y = -140
+        cube.position.x = 130
+        cube.position.z = 3
+        _scene.add(cube);
+        // 上边线
+        var geometry = new THREE.BoxBufferGeometry(320, 30, 5);
+        var material = new THREE.MeshBasicMaterial({ color: 0xe7c9be });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.y = 140
+        cube.position.x = 0
+        cube.position.z = 3
+        _scene.add(cube);
+        // 右边线
+        var geometry = new THREE.BoxBufferGeometry(30, 310, 5);
+        var material = new THREE.MeshBasicMaterial({ color: 0xe7c9be });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.y = 0
+        cube.position.x = -145
+        cube.position.z = 3
+        _scene.add(cube);
+        // 左边线
+        var geometry = new THREE.BoxBufferGeometry(30, 310, 5);
+        var material = new THREE.MeshBasicMaterial({ color: 0xe7c9be });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.y = 0
+        cube.position.x = 145
+        cube.position.z = 3
+        _scene.add(cube);
+        // 绿化草原
+        var geometry = new THREE.BoxBufferGeometry(150, 20, 5);
+        var material = new THREE.MeshBasicMaterial({ color: 0xb0b165 });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.y = -140
+        cube.position.x = -60
+        cube.position.z = 6
+        _scene.add(cube);
+        var geometry = new THREE.BoxBufferGeometry(50, 20, 5);
+        var material = new THREE.MeshBasicMaterial({ color: 0xb0b165 });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.y = -140
+        cube.position.x = 130
+        cube.position.z = 6
+        _scene.add(cube);
+        // 上边线
+        var geometry = new THREE.BoxBufferGeometry(300, 20, 5);
+        var material = new THREE.MeshBasicMaterial({ color: 0xb0b165 });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.y = 140
+        cube.position.x = 0
+        cube.position.z = 6
+        _scene.add(cube);
+        // 右边线
+        var geometry = new THREE.BoxBufferGeometry(20, 300, 5);
+        var material = new THREE.MeshBasicMaterial({ color: 0xb0b165 });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.y = 0
+        cube.position.x = -145
+        cube.position.z = 6
+        _scene.add(cube);
+        // 左边线
+        var geometry = new THREE.BoxBufferGeometry(20, 300, 5);
+        var material = new THREE.MeshBasicMaterial({ color: 0xb0b165 });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.y = 0
+        cube.position.x = 145
+        cube.position.z = 6
+        _scene.add(cube);
+
+        //2. 周边绿化
+        var b = 10
+        for (var a = 1; a < 6; a++) {
+            b += 50
+            var geometry = new THREE.CylinderBufferGeometry(5, 3, 35, 10);
+            var material = new THREE.MeshBasicMaterial({ color: 0x795548 });
+            var cylinder = new THREE.Mesh(geometry, material);
+            cylinder.position.z = 25;
+            cylinder.position.x = 145;
+            cylinder.position.y = -160 + b;
+            cylinder.rotation.x = 1.5
+            _scene.add(cylinder);
+            var geometry = new THREE.SphereGeometry(10, 20, 20);
+            var material = new THREE.MeshBasicMaterial({ color: 0xb0b165 });
+            var sphere = new THREE.Mesh(geometry, material);
+            _scene.add(sphere);
+            sphere.position.z = 35;
+            sphere.position.x = 145;
+            sphere.position.y = -160 + b;
+        }
+        // 门口标示
+        var geometry = new THREE.BoxBufferGeometry(120, 5, 25);
+        var material = new THREE.MeshBasicMaterial({ color: 0x0a90a0 });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.y = -140
+        cube.position.x = -60
+        cube.position.z = 35
+        _scene.add(cube);
+        function render() {
+            // 渲染，即摄像机拍下此刻的场景
+            renderer.render(_scene, camera);
+            requestAnimationFrame(render)
+        }
+        var geometry = new THREE.BoxBufferGeometry(8, 3, 25);
+        var material = new THREE.MeshBasicMaterial({ color: 0xe2dfdf });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.y = -140
+        cube.position.x = -100
+        cube.position.z = 18
+        _scene.add(cube);
+        var geometry = new THREE.BoxBufferGeometry(10, 3, 25);
+        var material = new THREE.MeshBasicMaterial({ color: 0xe2dfdf });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.y = -140
+        cube.position.x = -25
+        cube.position.z = 18
+        _scene.add(cube);
+        var loader = new THREE.FontLoader();
+
+        var text = new THREE.FontLoader().load('fonts/helvetiker_bold.typeface.json', function(text) {
+            var gem = new THREE.TextGeometry('Skyworth  Vr', {
+                size: 10, //字号大小，一般为大写字母的高度
+                height: 1, //文字的厚度
+                weight: 'normal', //值为'normal'或'bold'，表示是否加粗
+                font: text, //字体，默认是'helvetiker'，需对应引用的字体文件
+                style: 'normal', //值为'normal'或'italics'，表示是否斜体
+                bevelThickness: 1, //倒角厚度
+                bevelSize: 1, //倒角宽度
+                curveSegments: 32,//弧线分段数，使得文字的曲线更加光滑
+                bevelEnabled: true, //布尔值，是否使用倒角，意为在边缘处斜切
+            });
+            gem.center();
+            var mat = new THREE.MeshPhongMaterial({
+                color: 0xffe502,
+                specular: 0x009900,
+                shininess: 1,
+                shading: THREE.FlatShading
+            });
+            var textObj = new THREE.Mesh(gem, mat);
+            textObj.position.x=-55
+            textObj.position.y= -142
+            textObj.position.z=35
+            textObj.rotation.x=1.5
+            textObj.castShadow = true;
+            _scene.add(textObj);
+        });
+        function render() {
+            // 渲染，即摄像机拍下此刻的场景
+            renderer.render(_scene, camera);
+            requestAnimationFrame(render)
+        }
+        render()
+
+    </script>
+</body>
+
+</html>
