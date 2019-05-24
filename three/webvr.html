@@ -42,6 +42,7 @@
         _scene.add(cube);
         camera.position.z = 460;
 
+
         // 马路边线
         // 下边线
         var geometry = new THREE.BoxBufferGeometry(200, 30, 5);
@@ -75,9 +76,43 @@
         cube.position.x = -145
         cube.position.z = 3
         _scene.add(cube);
+        //
+
+
+        var geometry = new THREE.BoxBufferGeometry(200, 30, 5);
+        var material = new THREE.MeshBasicMaterial({ color: 0xd8ccc7 });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.y = -140
+        cube.position.x = -60
+        cube.position.z = 3
+        _scene.add(cube);
+
+        var geometry = new THREE.BoxBufferGeometry(50, 30, 5);
+        var material = new THREE.MeshBasicMaterial({ color: 0xd8ccc7 });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.y = -140
+        cube.position.x = 130
+        cube.position.z = 3
+        _scene.add(cube);
+        // 上边线
+        var geometry = new THREE.BoxBufferGeometry(320, 30, 5);
+        var material = new THREE.MeshBasicMaterial({ color: 0xd8ccc7 });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.y = 140
+        cube.position.x = 0
+        cube.position.z = 3
+        _scene.add(cube);
+        // 右边线
+        var geometry = new THREE.BoxBufferGeometry(30, 310, 5);
+        var material = new THREE.MeshBasicMaterial({ color: 0xd8ccc7 });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.y = 0
+        cube.position.x = -145
+        cube.position.z = 3
+        _scene.add(cube);
         // 左边线
         var geometry = new THREE.BoxBufferGeometry(30, 310, 5);
-        var material = new THREE.MeshBasicMaterial({ color: 0xe7c9be });
+        var material = new THREE.MeshBasicMaterial({ color: 0xd8ccc7 });
         var cube = new THREE.Mesh(geometry, material);
         cube.position.y = 0
         cube.position.x = 145
@@ -151,11 +186,7 @@
         cube.position.x = -60
         cube.position.z = 35
         _scene.add(cube);
-        function render() {
-            // 渲染，即摄像机拍下此刻的场景
-            renderer.render(_scene, camera);
-            requestAnimationFrame(render)
-        }
+
         var geometry = new THREE.BoxBufferGeometry(8, 3, 25);
         var material = new THREE.MeshBasicMaterial({ color: 0xe2dfdf });
         var cube = new THREE.Mesh(geometry, material);
@@ -170,9 +201,9 @@
         cube.position.x = -25
         cube.position.z = 18
         _scene.add(cube);
+        //广告牌文字
         var loader = new THREE.FontLoader();
-
-        var text = new THREE.FontLoader().load('fonts/helvetiker_bold.typeface.json', function(text) {
+        var text = new THREE.FontLoader().load('fonts/helvetiker_bold.typeface.json', function (text) {
             var gem = new THREE.TextGeometry('Skyworth  Vr', {
                 size: 10, //字号大小，一般为大写字母的高度
                 height: 1, //文字的厚度
@@ -192,18 +223,91 @@
                 shading: THREE.FlatShading
             });
             var textObj = new THREE.Mesh(gem, mat);
-            textObj.position.x=-55
-            textObj.position.y= -142
-            textObj.position.z=35
-            textObj.rotation.x=1.5
+            textObj.position.x = -55
+            textObj.position.y = -142
+            textObj.position.z = 35
+            textObj.rotation.x = 1.5
             textObj.castShadow = true;
             _scene.add(textObj);
         });
+        // 斑马线
+        var b = 0
+        for (var a = 0; a < 8; a++) {
+            b += 5
+            var geometry = new THREE.BoxBufferGeometry(25, 2, 1);
+            var material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+            var cube = new THREE.Mesh(geometry, material);
+            console.log(b)
+            cube.position.y = -200 + b
+            cube.position.x = 20
+            cube.position.z = 1
+            _scene.add(cube);
+        }
+        var geometry = new THREE.BoxGeometry(150, 150, 30);
+        var material = new THREE.MeshBasicMaterial({ color: 0xdddddd });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.z = 12
+        _scene.add(cube);
+        var geometry = new THREE.BoxGeometry(150, 150, 30);
+        var material = new THREE.MeshBasicMaterial({ color: 0xaac9e2 });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.z = 42
+        _scene.add(cube);
+        var geometry = new THREE.BoxGeometry(150, 150, 30);
+        var material = new THREE.MeshBasicMaterial({ color: 0xdddddd });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.z = 72
+        _scene.add(cube);
+        var geometry = new THREE.BoxGeometry(150, 150, 30);
+        var material = new THREE.MeshBasicMaterial({ color: 0xaac9e2 });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.z = 102
+        _scene.add(cube);
+        var geometry = new THREE.BoxGeometry(150, 150, 30);
+        var material = new THREE.MeshBasicMaterial({ color: 0xdddddd });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.z = 132
+        _scene.add(cube);
+        var geometry = new THREE.BoxGeometry(150, 150, 30);
+        var material = new THREE.MeshBasicMaterial({ color: 0xaac9e2 });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.z = 162
+        _scene.add(cube);
+        var geometry = new THREE.BoxGeometry(150, 150, 30);
+        var material = new THREE.MeshBasicMaterial({ color: 0xdddddd });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.z = 192
+        _scene.add(cube);
+        var geometry = new THREE.BoxGeometry(30, 1, 20);
+        var material = new THREE.MeshBasicMaterial({ color: 0x2F4056 });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.z = 10
+        cube.position.x = 30
+        cube.position.y = -75
+        _scene.add(cube);
+
+        var geometry = new THREE.BoxGeometry(30, 1, 20);
+        var material = new THREE.MeshBasicMaterial({ color: 0x734c3d });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.z = 10
+        cube.position.x = 30
+        cube.position.y = -75
+        _scene.add(cube);
+        var geometry = new THREE.BoxGeometry(5,40, 50);
+        var material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        var cube = new THREE.Mesh(geometry, material);
+        cube.position.z = 30
+        cube.position.x = 30
+        cube.position.y = -75
+        cube.rotation.x = 0
+        cube.rotation.y = 4.71
+        _scene.add(cube);
         function render() {
             // 渲染，即摄像机拍下此刻的场景
             renderer.render(_scene, camera);
             requestAnimationFrame(render)
         }
+
         render()
 
     </script>
